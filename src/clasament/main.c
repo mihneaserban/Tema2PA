@@ -106,6 +106,31 @@ int compare_float ( float a , float b )
     }
 }
 
+///// functie de calculare a prestigiului ( formula 1 din pdf )
+#define totalStages 6
+#define const 29.92394
+
+float prestige ( int victories )
+{
+    float q = 0.15 ;
+    float l = totalStages ; 
+    float index = 1 ;
+
+        while ( victories )
+        {
+            index *= ( 2 - q ) ;
+            victories -- ;
+        } 
+        //index /= ( 2 - q ) ;
+    
+       
+    float pr = q * index ;
+    float constant = const ;  
+
+    pr = pr / constant ;
+    //pr = custom_round( pr , 4 ) ; 
+    return pr ;
+}
 
 
 int main( int argc , char * argv[] )
@@ -162,6 +187,7 @@ int main( int argc , char * argv[] )
     int copy = max_teams , aux = max_teams ;
     float pts1 , pts2 ;
     char name1[50] , name2[50] ;
+    float Prestige ;
 
     for( i=1 ; i<=Stages ; i++ )
     {
@@ -204,11 +230,19 @@ int main( int argc , char * argv[] )
         // si in matricea de adiacenta punem pe pozitia pierzatorului valoarea 1
 
         ///////////////
+
+        // linia urmatoare calculeaza prestigiul echipelor cu i-1 victorii
+            Prestige = prestige( i - 1 ) ;
     
         while( isEmpty_Q ( losers ) == 0 ) 
         {
             deQueue( losers , name , &pts ) ;
                 strcpy( name1 , name ) ;
+                // task 2
+                /////////
+                fprintf( out_scor , "%.4f %s\n" , Prestige , name1 ) ;
+                /////////
+            
             deQueue( winners , name , &pts ) ;
                 strcpy( name2 , name ) ;
 
@@ -228,6 +262,9 @@ int main( int argc , char * argv[] )
     }
 
     printGraph( g , out_graf ) ;
+
+    // mai avem nevoie la task2 sa afisam prestigiul si numele castigatorului
+    fprintf( out_scor , "%.4f %s" , prestige( Stages ) , name ) ;
 
     return 0 ;
 }

@@ -46,3 +46,4 @@ void addInGraph ( Graph * g , int p1 , int p2 )
 {
     g->a[p1][p2] = 1 ;
 }
+
