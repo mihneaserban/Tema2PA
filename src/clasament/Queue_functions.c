@@ -73,3 +73,15 @@ void printQueue ( Queue * q , FILE * f_out )
         aux = aux->next;
     }
 }
+
+void deleteQueue ( Queue * q ) 
+{
+    Team * aux ;
+    while ( ! isEmpty_Q( q ) )
+    {
+        aux = q->front ;
+        q->front = (q->front)->next ;
+        free( aux ) ;
+    }
+    free( q ) ;
+}

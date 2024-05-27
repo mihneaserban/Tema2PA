@@ -33,5 +33,7 @@ void deQueue ( Queue * q , char String[] , float * pts ) ;
 
 void printQueue ( Queue * q , FILE * f_out ) ;
 
+void deleteQueue ( Queue * q ) ;
+
 
 #endif // QUEUE_HEADER

@@ -266,5 +266,16 @@ int main( int argc , char * argv[] )
     // mai avem nevoie la task2 sa afisam prestigiul si numele castigatorului
     fprintf( out_scor , "%.4f %s" , prestige( Stages ) , name ) ;
 
+
+    /// stergerea structurilor de date si inchiderea fisierelor 
+
+    deleteQueue( winners ) ;
+    deleteQueue( losers ) ;
+    deleteQueue( games ) ;
+
+    fclose( input ) ;
+    fclose( out_graf ) ;
+    fclose( out_scor ) ;
+
     return 0 ;
 }
